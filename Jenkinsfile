@@ -21,7 +21,7 @@ pipeline {
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  script{
-                 app =  docker.build("spp")
+                 app =  docker.build("asg")
                  }
                }
             }
@@ -30,7 +30,7 @@ pipeline {
 	stage('Push') {
             steps {
                 script{
-                    docker.withRegistry('https://707024700939.dkr.ecr.eu-west-2.amazonaws.com/', 'ecr:us-west-2:aws-credentials') {
+                    docker.withRegistry('https://707024700939.dkr.ecr.eu-west-2.amazonaws.com/asg', 'ecr:us-west-2:aws-credentials') {
                     app.push("latest")
                     }
                 }
