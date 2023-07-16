@@ -13,7 +13,9 @@ pipeline {
 	   stage('RunSCAAnalysisUsingSnyk') {
               steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-					sh 'mvn snyk:test -fn'
+			         sh 'chmod +x mvnw' // Ensure the script has executable permissions
+                                 sh 'mvn dependency:tree -version'		
+				 sh 'mvn snyk:test -fn'
 				}
 			}
     }		
